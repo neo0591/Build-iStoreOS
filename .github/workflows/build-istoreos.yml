@@ -29,8 +29,8 @@ jobs:
       matrix:
         ARCHITECTURE:
           - RK33
-          - RK35
-          - X86
+         # - RK35
+         # - X86
         os:
           - ubuntu-22.04
 
