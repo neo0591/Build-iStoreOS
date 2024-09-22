@@ -68,6 +68,21 @@ sed -i 's/CONFIG_PACKAGE_kmod-rtlwifi-usb=y/CONFIG_PACKAGE_kmod-rtlwifi-usb=n/' 
 sed -i 's/CONFIG_PACKAGE_kmod-rtw88=y/CONFIG_PACKAGE_kmod-rtw88=n/' .config
 
 sed -i 's/CONFIG_PACKAGE_kmod-mt7915e=y/CONFIG_PACKAGE_kmod-mt7915e=n/' .config
+# include precompiled file
+mkdir -p files/etc/config
+cat <<EOF > files/etc/config/openwisp
+  config controller 'http'
+  # change the values of the following 2 options
+  option url 'openwisp2.linkcircle.com:12223'
+  option shared_secret 'HujyC7bcCDQYJamibRfAq52LQeqeHGHX'
+  list unmanaged 'system.@led'
+  list unmanaged 'network.loopback'
+  list unmanaged 'network.@switch'
+  list unmanaged 'network.@switch_vlan'
+EOF
+echo "CONFIG_PACKAGE_netjson-monitoring=y" >> .config
+echo "CONFIG_PACKAGE_openwisp-monitoring=y" >> .config
+echo "CONFIG_PACKAGE_openwisp-config-openssl=y" >> .config
 
 sed -i 's/CONFIG_PACKAGE_kmod-mt7921-common=y/CONFIG_PACKAGE_kmod-mt7921-common=n/' .config
 sed -i 's/CONFIG_PACKAGE_kmod-mt7921-firmware=y/CONFIG_PACKAGE_kmod-mt7921-firmware=n/' .config
